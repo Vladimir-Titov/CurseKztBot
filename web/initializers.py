@@ -6,5 +6,11 @@ from settings import TelegramConfig
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=TelegramConfig.BOT_TOKEN)
-dp = Dispatcher(bot)
+
+def init_bot() -> Dispatcher:
+    bot = Bot(token=TelegramConfig.BOT_TOKEN)
+    dispatcher = Dispatcher(bot)
+    return dispatcher
+
+
+dp = init_bot()
