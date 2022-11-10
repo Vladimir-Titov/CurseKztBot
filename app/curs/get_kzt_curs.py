@@ -1,13 +1,12 @@
 import asyncio
 import json
-from pprint import pprint
 from typing import Dict, Any
 
 import aiohttp
+
 from settings import ExchangeConfig
 
 headers = {
-    "authority": "www.kith.com",
     "cache-control": "max-age=0",
     "upgrade-insecure-requests": "1",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.106 Safari/537.36",
