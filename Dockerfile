@@ -1,6 +1,16 @@
-FROM python:3.8-slim
+FROM python:3.8-slim as base
+
+# add requirements
+COPY requirements.txt /app/requirements.txt
+
 WORKDIR /app
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
-COPY . /app/
-ENTRYPOINT ["python" , "manage.py"]
+
+RUN  pip install -r requirements.txt
+
+FROM base as app
+
+WORKDIR /app
+
+ENTRYPOINT ["python", "manage.py"]
+
+COPY ./ /app/

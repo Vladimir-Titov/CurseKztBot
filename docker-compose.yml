@@ -1,10 +1,26 @@
 version: '3.7'
 services:
-  curs_bot_postgres:
-    image: postgres:13
+  bot_postgres:
+    image: postgres:11
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: curs_bot
+      POSGRES_USER: postgres
+      PGUSER: postgres
+      POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - '54300:5432'
+      - '5432:5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  bot:
+    container_name: curs_bot
+    image: curs
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: python manage.py
+    environment:
+      PYTHONUNBUFFERED: 1
